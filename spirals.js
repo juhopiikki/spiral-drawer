@@ -2,20 +2,36 @@ var centx = 320;
 var centy = 320;
 
 var dots = []
-var particle;
+var particles = [];
+
+var drawOn = 1;
 
 function setup() {
   createCanvas(640, 640);
   background(0);
-  particle = new Particle(0, 100);
-  fill('#FAA613');
-  stroke('#FAA613');
+
+  // radius, cycloidRadius, color, hypo, d
+  //particles.push(new Particle(215, 14, '#FFAE00', 0)); // #FAA613
+  particles.push(new Particle(100, 90, '#91D815', 1, 20)); // #688E26
+  particles.push(new Particle(150, 30, '#FF4300', 0, 15)); // #688E26
+  particles.push(new Particle(50, 45, '#FF006E', 0, 10)); // #688E26
+  particles.push(new Particle(200, 48, '#00BBFF', 1, 50)); // #688E26
+  // #FF4300
+  // #FF006E
+  // #00BBFF
+
+  //fill('#FAA613');
+  //stroke('#FAA613');
 }
 
 function draw() {
-  background(0);
-  particle.update();
-  particle.show();
+  //background(0);
+  if(drawOn) {
+    for (var i = 0; i < particles.length; i++) {
+      particles[i].update();
+      particles[i].show();
+    }
+  }
   // stroke('#FAA613');
 
   // stroke(mouseX, mouseY, mouseX+mouseY);
@@ -29,4 +45,8 @@ function draw() {
   //dots.push(ellipse(x + centx, y + centy, 5, 5));
   //for ()
 
+}
+
+function mouseClicked() {
+  drawOn = !drawOn;
 }

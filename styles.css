@@ -1,0 +1,26 @@
+h1 {
+  font-family: Helvetica, Geneva, Arial,
+  SunSans-Regular, sans-serif;
+  color: #FFFFFF;
+  text-align: center
+}
+canvas {
+  position: absolute;
+  left: 50%;
+  top: 55%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+  height: 55%;
+  padding: 20px;
+  text-align: center;
+}
+body {
+  background-color: #000000;
+  /*margin: 0;*/
+  display: flex;
+  /* This centers our sketch horizontally. */
+  justify-content: center;
+
+  /* This centers our sketch vertically.
+  align-items: center;*/
+}
