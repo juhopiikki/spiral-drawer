@@ -1,21 +1,22 @@
-var centx = 320;
-var centy = 320;
+var centx = 250;
+var centy = 250;
 
 var dots = []
 var particles = [];
 
 var drawOn = 1;
+var slider;
 
 function setup() {
-  createCanvas(640, 640);
-  background(0);
+  createCanvas(500, 500);
+  //background(0);
 
   // radius, cycloidRadius, color, hypo, d
   //particles.push(new Particle(215, 14, '#FFAE00', 0)); // #FAA613
   particles.push(new Particle(100, 90, '#91D815', 1, 20)); // #688E26
   particles.push(new Particle(150, 30, '#FF4300', 0, 15)); // #688E26
-  particles.push(new Particle(50, 45, '#FF006E', 0, 10)); // #688E26
-  particles.push(new Particle(200, 48, '#00BBFF', 1, 50)); // #688E26
+  //particles.push(new Particle(50, 45, '#FF006E', 0, 10)); // #688E26
+  //particles.push(new Particle(200, 48, '#00BBFF', 1, 50)); // #688E26
   // #FF4300
   // #FF006E
   // #00BBFF

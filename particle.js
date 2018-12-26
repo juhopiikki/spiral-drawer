@@ -1,6 +1,3 @@
-//var radius = 215;
-//var cycloidRadius = 14;
-//var angle = 0;
 var taillength = 50;
 var particleR = 5;
 
@@ -22,9 +19,19 @@ function Particle(radius, cycloidRadius, color, hypo, d) {
 
   this.tail = [];
   this.hypo = hypo;
-  this.d = d
+  this.d = d;
+
+  this.radiusslider = createSlider(0, 200, radius);
+  this.cycloidRadiusslider = createSlider(0, 200, cycloidRadius);
+  this.hyposlider = createSlider(0, 1, hypo);
+  this.dslider = createSlider(0, 200, d);
+  //new p5(this.slider, "verticalDiv");
 
   this.update = function() {
+    this.radius = this.radiusslider.value();
+    this.cycloidRadius = this.cycloidRadiusslider.value();
+    this.hypo = this.hyposlider.value();
+    this.d = this.dslider.value();
     this.angle += 4;
     var ang1 = radians(this.angle);
 
@@ -78,18 +85,11 @@ function Particle(radius, cycloidRadius, color, hypo, d) {
     noFill();
 
     beginShape();
-    // print("1");
-    // print(this.lastx + centx, this.lasty + centy);
-    //print(this.medx + centx, this.medy + centy);
-    //print(this.x + centx, this.y + centy);
     curveVertex(this.lastx + centx, this.lasty + centy);
     curveVertex(this.lastx + centx, this.lasty + centy);
     curveVertex(this.medx + centx, this.medy + centy);
     curveVertex(this.x + centx, this.y + centy);
     curveVertex(this.x + centx, this.y + centy);
-    //curveVertex(200, 200);
-    //curveVertex(250, 300);
-    //curveVertex(300, 200);
 
     endShape();
   }
