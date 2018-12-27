@@ -13,10 +13,10 @@ function setup() {
 
   // radius, cycloidRadius, color, hypo, d
   //particles.push(new Particle(215, 14, '#FFAE00', 0)); // #FAA613
-  particles.push(new Particle(100, 90, '#91D815', 1, 20)); // #688E26
-  particles.push(new Particle(150, 30, '#FF4300', 0, 15)); // #688E26
-  //particles.push(new Particle(50, 45, '#FF006E', 0, 10)); // #688E26
-  //particles.push(new Particle(200, 48, '#00BBFF', 1, 50)); // #688E26
+  particles.push(new Tail_Particle(100, 90, '#91D815', 1, 20)); // #688E26
+  particles.push(new Tail_Particle(150, 30, '#FF4300', 0, 15)); // #688E26
+  particles.push(new Tail_Particle(50, 45, '#FF006E', 0, 10)); // #688E26
+  particles.push(new Tail_Particle(200, 48, '#00BBFF', 1, 50)); // #688E26
   // #FF4300
   // #FF006E
   // #00BBFF
@@ -26,7 +26,7 @@ function setup() {
 }
 
 function draw() {
-  //background(0);
+  background(0);
   if(drawOn) {
     for (var i = 0; i < particles.length; i++) {
       particles[i].update();

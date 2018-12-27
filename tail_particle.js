@@ -1,4 +1,7 @@
-function Particle(radius, cycloidRadius, color, hypo, d) {
+var taillength = 100;
+var particleR = 5;
+
+function Tail_Particle(radius, cycloidRadius, color, hypo, d) {
   this.x = 0;
   this.y = 0;
 
@@ -53,9 +56,28 @@ function Particle(radius, cycloidRadius, color, hypo, d) {
       this.lasty = this.y;
     }
 
+    var v = [this.lastx, this.lasty, this.medx, this.medy, this.x, this.y];
+    this.tail.push(v);
+    if(this.tail.length > taillength) {
+      this.tail.splice(0,1);
+    }
   }
 
   this.show = function() {
+    for(var i = 0; i < this.tail.length; i++) {
+      var mult = (i / this.tail.length);
+      beginShape();
+
+      fill(colorAlpha(color, mult));
+      stroke(colorAlpha(color, mult));
+      var pos = this.tail[i];
+      curveVertex(pos[0] + centx, pos[1] + centy);
+      curveVertex(pos[0] + centx, pos[1] + centy);
+      curveVertex(pos[2] + centx, pos[3] + centy);
+      curveVertex(pos[4] + centx, pos[5] + centy);
+      curveVertex(pos[4] + centx, pos[5] + centy);
+      endShape();
+    }
 
     fill(color); //'#FAA613');
     stroke(color); //'#FAA613');
@@ -93,4 +115,9 @@ function Particle(radius, cycloidRadius, color, hypo, d) {
     (rd - crd) * sin(ang1) - d * sin (((rd - crd) / crd) * ang1)];
   }
 
+}
+
+function colorAlpha(aColor, alpha) {
+  var c = color(aColor);
+  return color('rgba(' +  [red(c), green(c), blue(c), alpha].join(',') + ')');
 }
