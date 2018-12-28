@@ -1,9 +1,11 @@
 var taillength = 100;
 var particleR = 5;
-var updateSpeed = 2;
+var updateSpeed = 4;
 var updateHalf = updateSpeed/2;
 
-function Tail_Particle(radius, cycloidRadius, color, hypo, d, centx, centy) {
+function Tail_Particle(radius, cycloidRadius, color, hypo, d, centx, centy, id, angle) {
+  this.id = id;
+
   this.x = 0;
   this.y = 0;
 
@@ -21,21 +23,47 @@ function Tail_Particle(radius, cycloidRadius, color, hypo, d, centx, centy) {
   this.green = green(color);
   this.blue = blue(color);
 
-  this.angle = 0;
+  this.angle = angle;
 
   this.tail = [];
   this.hypo = hypo;
   this.d = d;
 
+  this.header = createElement('p', 'Particle ' + id);
+  this.radiussliderH = createElement('p', 'R1');
   this.radiusslider = createSlider(0, 200, radius);
+  this.cycloidRadiussliderH = createElement('p', 'R2');
   this.cycloidRadiusslider = createSlider(0, 200, cycloidRadius);
+  this.hyposliderH = createElement('p', 'Epitrochoid/Hypotrochoid');
   this.hyposlider = createSlider(0, 1, hypo);
+  this.dsliderH = createElement('p', 'd');
   this.dslider = createSlider(0, 200, d);
 
+  //this.removebutton.parent('slider-holder');
+  this.header.parent('slider-holder');
+  this.radiussliderH.parent('slider-holder');
   this.radiusslider.parent('slider-holder');
+  this.cycloidRadiussliderH.parent('slider-holder');
   this.cycloidRadiusslider.parent('slider-holder');
+  this.hyposliderH.parent('slider-holder');
   this.hyposlider.parent('slider-holder');
+  this.dsliderH.parent('slider-holder');
   this.dslider.parent('slider-holder');
+
+  this.header.addClass(id);
+  this.header.addClass('particle_header');
+  this.radiussliderH.addClass('slider_H');
+  this.cycloidRadiussliderH.addClass('slider_H');
+  this.hyposliderH.addClass('slider_H');
+  this.dsliderH.addClass('slider_H');
+  this.radiusslider.addClass(id);
+  this.cycloidRadiusslider.addClass(id);
+  this.hyposlider.addClass(id);
+  this.dslider.addClass(id);
+  this.radiussliderH.addClass(id);
+  this.cycloidRadiussliderH.addClass(id);
+  this.hyposliderH.addClass(id);
+  this.dsliderH.addClass(id);
 
   this.update = function() {
     this.radius = this.radiusslider.value();
@@ -139,6 +167,19 @@ function Tail_Particle(radius, cycloidRadius, color, hypo, d, centx, centy) {
   this.epitrochoid = function(ang1, d, crd, rd) {
     return [(rd - crd) * cos(ang1) + d * cos (((rd - crd) / crd) * ang1),
     (rd - crd) * sin(ang1) - d * sin (((rd - crd) / crd) * ang1)];
+  }
+
+  this.reset = function() {
+    this.color = color;
+    this.angle = 0;
+    this.x = 0;
+    this.y = 0;
+
+    this.lastx = 0;
+    this.lasty = 0;
+
+    this.medx = 0;
+    this.medy = 0;
   }
 
 }

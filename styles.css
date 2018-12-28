@@ -18,16 +18,16 @@
 h1 {
   font-family: Helvetica, Geneva, Arial,
   SunSans-Regular, sans-serif;
-  color: #FFFFFF;
+  color: #FF946D;
   text-align: center
 }
 canvas {
   position: absolute;
   left: 60%;
-  top: 55%;
+  top: 50%;
   transform: translate(-50%, -50%);
   width: 50%;
-  height: 55%;
+  height: 50%;
   padding: 20px;
   text-align: center;
 }
@@ -47,7 +47,7 @@ body {
 .particle_header {
   font-family: Helvetica, Geneva, Arial,
   SunSans-Regular, sans-serif;
-  color: #FF4300;
+  color: #FF946D;
   text-align: center;
   margin: 5px;
   font-size: 18px;
@@ -55,7 +55,7 @@ body {
 .slider_H {
   font-family: Helvetica, Geneva, Arial,
   SunSans-Regular, sans-serif;
-  color: #FFFFFF;
+  color: #FF99AF;
   text-align: left;
   font-size: 14px;
   margin: 0px;

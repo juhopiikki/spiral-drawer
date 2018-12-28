@@ -1,7 +1,7 @@
 var updateSpeed = 4;
 var updateHalf = updateSpeed/2;
 
-function Particle(radius, cycloidRadius, color, hypo, d, centx, centy, id) {
+function Particle(radius, cycloidRadius, color, hypo, d, centx, centy, id, angle) {
   this.id = id;
 
   this.x = 0;
@@ -17,7 +17,7 @@ function Particle(radius, cycloidRadius, color, hypo, d, centx, centy, id) {
   this.cycloidRadius = cycloidRadius;
 
   this.color = color;
-  this.angle = 0;
+  this.angle = angle;
 
   this.tail = [];
   this.hypo = hypo;
