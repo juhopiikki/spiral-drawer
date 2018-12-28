@@ -23,7 +23,6 @@ function Particle(radius, cycloidRadius, color, hypo, d, centx, centy, id, angle
   this.hypo = hypo;
   this.d = d;
 
-  //this.removebutton = createButton('Remove');
   this.header = createElement('p', 'Particle ' + id);
   this.radiussliderH = createElement('p', 'R1');
   this.radiusslider = createSlider(0, 200, radius);
@@ -34,7 +33,6 @@ function Particle(radius, cycloidRadius, color, hypo, d, centx, centy, id, angle
   this.dsliderH = createElement('p', 'd');
   this.dslider = createSlider(0, 200, d);
 
-  //this.removebutton.parent('slider-holder');
   this.header.parent('slider-holder');
   this.radiussliderH.parent('slider-holder');
   this.radiusslider.parent('slider-holder');
@@ -59,9 +57,6 @@ function Particle(radius, cycloidRadius, color, hypo, d, centx, centy, id, angle
   this.cycloidRadiussliderH.addClass(id);
   this.hyposliderH.addClass(id);
   this.dsliderH.addClass(id);
-
-  //this.removebutton.mousePressed(removeThisParticle(this.removebutton, this.radiusslider, this.cycloidRadiusslider, this.hyposlider, this.dslider));
-  //this.removebutton.mousePressed(this.removeThisParticle);
 
   this.update = function() {
     this.radius = this.radiusslider.value();
@@ -97,8 +92,8 @@ function Particle(radius, cycloidRadius, color, hypo, d, centx, centy, id, angle
 
   this.show = function() {
 
-    fill(color); //'#FAA613');
-    stroke(color); //'#FAA613');
+    fill(color);
+    stroke(color);
     strokeWeight(1.5);
 
     noFill();
@@ -147,11 +142,11 @@ function Particle(radius, cycloidRadius, color, hypo, d, centx, centy, id, angle
   }
 
   this.removeThisParticle = function() {
-    this.removebutton.remove(); //.parentNode.removeChild(this.removebutton);
-    this.radiusslider.remove(); //.parentNode.removeChild(this.radiusslider);
-    this.cycloidRadiusslider.remove(); //.parentNode.removeChild(this.cycloidRadiusslider);
-    this.hyposlider.remove(); //.parentNode.removeChild(this.hyposlider);
-    this.dslider.remove(); //.parentNode.removeChild(this.dslider);
+    this.removebutton.remove();
+    this.radiusslider.remove();
+    this.cycloidRadiusslider.remove();
+    this.hyposlider.remove();
+    this.dslider.remove();
   }
 
 }

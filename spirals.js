@@ -60,10 +60,6 @@ function draw() {
   }
 }
 
-/*function mouseClicked() {
-  drawOn = !drawOn;
-}*/
-
 function pauseSkecth() {
   drawOn = !drawOn;
 }
@@ -93,7 +89,7 @@ function addParticle() {
   r = random(100, 255);
   g = random(100, 255);
   b = random(100, 255);
-  if(particles.length < 10) {    
+  if(particles.length < 10) {
     if(!tail) {
       particles.push(new Particle(random(20,200), random(30,100), color(r,g,b), random(0,1), random(5,50), centx, centy, id, 0));
     } else {
@@ -117,7 +113,6 @@ function removeParticle() {
 
 function tailOrCont() {
   if(!tail) {
-    //tempParticles = [];
     var tempParticles2 = particles.slice(0);
     while(particles.length > 0) {
       removeParticle();

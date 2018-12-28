@@ -133,8 +133,8 @@ function Tail_Particle(radius, cycloidRadius, color, hypo, d, centx, centy, id, 
       endShape();
     }
 
-    fill(this.color); //'#FAA613');
-    stroke(this.color); //'#FAA613');
+    fill(this.color);
+    stroke(this.color);
     strokeWeight(1.5);
 
     noFill();
