@@ -23,7 +23,7 @@ h1 {
 }
 canvas {
   position: absolute;
-  left: 50%;
+  left: 60%;
   top: 55%;
   transform: translate(-50%, -50%);
   width: 50%;
@@ -43,4 +43,20 @@ body {
 }
 #verticalDiv {
   position: relative;
+}
+.particle_header {
+  font-family: Helvetica, Geneva, Arial,
+  SunSans-Regular, sans-serif;
+  color: #FF4300;
+  text-align: center;
+  margin: 5px;
+  font-size: 18px;
+}
+.slider_H {
+  font-family: Helvetica, Geneva, Arial,
+  SunSans-Regular, sans-serif;
+  color: #FFFFFF;
+  text-align: left;
+  font-size: 14px;
+  margin: 0px;
 }

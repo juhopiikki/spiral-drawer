@@ -4,11 +4,13 @@ var drawOn = true;
 var centx;
 var centy;
 
+var id = 4;
+
 function setup() {
   var pauseBtn = createButton("Pause");
   var clearBtn = createButton("Clear");
   var resetBtn = createButton("Reset");
-  var addBtn = createButton("Add new");
+  var addBtn = createButton("Add random");
   var removeBtn = createButton("Remove one");
 
   pauseBtn.parent('slider-holder');
@@ -30,10 +32,10 @@ function setup() {
   canvas.parent('sketch-holder');
   // Syntax: radius, cycloidRadius, color, hypo, d
   //particles.push(new Particle(215, 14, '#FFAE00', 0)); // #FAA613
-  particles.push(new Particle(100, 90, '#91D815', 1, 20, centx, centy)); // #688E26
-  particles.push(new Particle(150, 30, '#FF4300', 0, 15, centx, centy)); // #688E26
-  particles.push(new Particle(50, 45, '#FF006E', 0, 10, centx, centy)); // #688E26
-  particles.push(new Particle(200, 48, '#00BBFF', 1, 50, centx, centy)); // #688E26
+  particles.push(new Particle(100, 90, '#91D815', 1, 20, centx, centy, 0)); // #688E26
+  particles.push(new Particle(150, 30, '#FF4300', 0, 15, centx, centy, 1)); // #688E26
+  particles.push(new Particle(50, 45, '#FF006E', 0, 10, centx, centy, 2)); // #688E26
+  particles.push(new Particle(200, 48, '#00BBFF', 1, 50, centx, centy, 3)); // #688E26
   // 198, 64, [169, 245, 184, 255], 1, 42
   // 47, 86, color, 1, 45
   // 50, 90, color, 1, 44
@@ -85,9 +87,18 @@ function addParticle() {
   r = random(100, 255);
   g = random(100, 255);
   b = random(100, 255);
-  particles.push(new Particle(random(20,200), random(30,100), color(r,g,b), random(0,1), random(5,50), centx, centy));
+  particles.push(new Particle(random(20,200), random(30,100), color(r,g,b), random(0,1), random(5,50), centx, centy, id));
+  id++;
 }
 
 function removeParticle() {
-  particles.pop();
+  if(particles.length > 0) {
+    remove_particle = particles.pop();
+    par_id = remove_particle.id;
+    elements = window.document.getElementsByClassName(par_id);
+    elemt_len = elements.length;
+    for(var i = 0; i < elemt_len; i++) {
+      elements[0].parentNode.removeChild(elements[0]);
+    }
+  }
 }
