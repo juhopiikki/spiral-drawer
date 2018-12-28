@@ -27,6 +27,7 @@ function Particle(radius, cycloidRadius, color, hypo, d, centx, centy, id, angle
   this.d = d;
 
   this.header = createElement('p', 'Particle ' + id);
+  this.colorPicker = createInput(color, 'color');
   this.radiusslider = createSlider(0, 200, radius);
   this.radiussliderH = createElement('p', 'R1: ' + radius);
   this.cycloidRadiusslider = createSlider(0, 200, cycloidRadius);
@@ -35,9 +36,6 @@ function Particle(radius, cycloidRadius, color, hypo, d, centx, centy, id, angle
   this.hyposliderH = createElement('p', 'Epitrochoid/Hypotrochoid: ' + hypo);
   this.dslider = createSlider(0, 200, d);
   this.dsliderH = createElement('p', 'd: ' + d);
-
-  print(this.radius);
-  print(this.radiusslider.value());
 
   //this.radiusslider.mousePressed(this.sliderUpdate);
   //this.cycloidRadiusslider.mousePressed(this.sliderUpdate());
@@ -49,6 +47,7 @@ function Particle(radius, cycloidRadius, color, hypo, d, centx, centy, id, angle
   //this.dslider.input(this.sliderUpdate);
 
   this.header.parent('slider-holder');
+  this.colorPicker.parent('slider-holder');
   this.radiussliderH.parent('slider-holder');
   this.radiusslider.parent('slider-holder');
   this.cycloidRadiussliderH.parent('slider-holder');
@@ -58,6 +57,7 @@ function Particle(radius, cycloidRadius, color, hypo, d, centx, centy, id, angle
   this.dsliderH.parent('slider-holder');
   this.dslider.parent('slider-holder');
 
+  this.colorPicker.addClass(id);
   this.header.addClass(id);
   this.header.addClass('particle_header');
   this.radiussliderH.addClass('slider_H');
@@ -110,6 +110,8 @@ function Particle(radius, cycloidRadius, color, hypo, d, centx, centy, id, angle
   }
 
   this.show = function() {
+    this.color = this.colorPicker.value();
+
     if(tail) {
       // make first one transparent
       fill(this.red, this.green, this.blue, 0);
@@ -141,8 +143,8 @@ function Particle(radius, cycloidRadius, color, hypo, d, centx, centy, id, angle
       }
     }
 
-    fill(color);
-    stroke(color);
+    fill(this.color);
+    stroke(this.color);
     strokeWeight(1.5);
 
     noFill();
