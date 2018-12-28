@@ -1,4 +1,7 @@
-# Spiral drawer
-Web application that draws beautiful spirals.
+# Trochoid drawer
 
-Inspired by kids toys.
+Web application that draws trochoids. Both Hypotrochoid and Epitrochoid.
+
+Using p5.js
+
+Inspired by kids "spiral" drawing toys.

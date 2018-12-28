@@ -111,6 +111,9 @@ function Particle(radius, cycloidRadius, color, hypo, d, centx, centy, id, angle
 
   this.show = function() {
     this.color = this.colorPicker.value();
+    this.red = red(this.color);
+    this.green = green(this.color);
+    this.blue = blue(this.color);
 
     if(tail) {
       // make first one transparent
