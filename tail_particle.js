@@ -30,14 +30,14 @@ function Tail_Particle(radius, cycloidRadius, color, hypo, d, centx, centy, id, 
   this.d = d;
 
   this.header = createElement('p', 'Particle ' + id);
-  this.radiussliderH = createElement('p', 'R1');
   this.radiusslider = createSlider(0, 200, radius);
-  this.cycloidRadiussliderH = createElement('p', 'R2');
+  this.radiussliderH = createElement('p', 'R1: ' + radius);
   this.cycloidRadiusslider = createSlider(0, 200, cycloidRadius);
-  this.hyposliderH = createElement('p', 'Epitrochoid/Hypotrochoid');
+  this.cycloidRadiussliderH = createElement('p', 'R2: ' + cycloidRadius);
   this.hyposlider = createSlider(0, 1, hypo);
-  this.dsliderH = createElement('p', 'd');
+  this.hyposliderH = createElement('p', 'Epitrochoid/Hypotrochoid: ' + hypo);
   this.dslider = createSlider(0, 200, d);
+  this.dsliderH = createElement('p', 'd: ' + d);
 
   //this.removebutton.parent('slider-holder');
   this.header.parent('slider-holder');

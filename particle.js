@@ -17,6 +17,9 @@ function Particle(radius, cycloidRadius, color, hypo, d, centx, centy, id, angle
   this.cycloidRadius = cycloidRadius;
 
   this.color = color;
+  this.red = red(color);
+  this.green = green(color);
+  this.blue = blue(color);
   this.angle = angle;
 
   this.tail = [];
@@ -24,14 +27,26 @@ function Particle(radius, cycloidRadius, color, hypo, d, centx, centy, id, angle
   this.d = d;
 
   this.header = createElement('p', 'Particle ' + id);
-  this.radiussliderH = createElement('p', 'R1');
   this.radiusslider = createSlider(0, 200, radius);
-  this.cycloidRadiussliderH = createElement('p', 'R2');
+  this.radiussliderH = createElement('p', 'R1: ' + radius);
   this.cycloidRadiusslider = createSlider(0, 200, cycloidRadius);
-  this.hyposliderH = createElement('p', 'Epitrochoid/Hypotrochoid');
+  this.cycloidRadiussliderH = createElement('p', 'R2: ' + cycloidRadius);
   this.hyposlider = createSlider(0, 1, hypo);
-  this.dsliderH = createElement('p', 'd');
+  this.hyposliderH = createElement('p', 'Epitrochoid/Hypotrochoid: ' + hypo);
   this.dslider = createSlider(0, 200, d);
+  this.dsliderH = createElement('p', 'd: ' + d);
+
+  print(this.radius);
+  print(this.radiusslider.value());
+
+  //this.radiusslider.mousePressed(this.sliderUpdate);
+  //this.cycloidRadiusslider.mousePressed(this.sliderUpdate());
+  //this.hyposlider.mousePressed(this.sliderUpdate());
+  //this.dslider.mousePressed(this.sliderUpdate());
+  //this.radiusslider.input(sliderUpdate(this.radiusslider, this.radiussliderH, this.radius, 'R1: '));
+  //this.cycloidRadiusslider.input(this.sliderUpdate);
+  //this.hyposlider.input(this.sliderUpdate);
+  //this.dslider.input(this.sliderUpdate);
 
   this.header.parent('slider-holder');
   this.radiussliderH.parent('slider-holder');
@@ -49,6 +64,7 @@ function Particle(radius, cycloidRadius, color, hypo, d, centx, centy, id, angle
   this.cycloidRadiussliderH.addClass('slider_H');
   this.hyposliderH.addClass('slider_H');
   this.dsliderH.addClass('slider_H');
+
   this.radiusslider.addClass(id);
   this.cycloidRadiusslider.addClass(id);
   this.hyposlider.addClass(id);
@@ -59,10 +75,6 @@ function Particle(radius, cycloidRadius, color, hypo, d, centx, centy, id, angle
   this.dsliderH.addClass(id);
 
   this.update = function() {
-    this.radius = this.radiusslider.value();
-    this.cycloidRadius = this.cycloidRadiusslider.value();
-    this.hypo = this.hyposlider.value();
-    this.d = this.dslider.value();
     this.angle += updateSpeed;
     var ang1 = radians(this.angle);
 
@@ -88,9 +100,46 @@ function Particle(radius, cycloidRadius, color, hypo, d, centx, centy, id, angle
       this.lasty = this.y;
     }
 
+    if(tail) {
+      var v = [this.lastx, this.lasty, this.medx, this.medy, this.x, this.y];
+      this.tail.push(v);
+      if(this.tail.length > taillength) {
+        this.tail.splice(0,1);
+      }
+    }
   }
 
   this.show = function() {
+    if(tail) {
+      // make first one transparent
+      fill(this.red, this.green, this.blue, 0);
+      stroke(this.red, this.green, this.blue, 0);
+      beginShape();
+      var pos = this.tail[0];
+      curveVertex(pos[0] + centx, pos[1] + centy);
+      curveVertex(pos[0] + centx, pos[1] + centy);
+      curveVertex(pos[2] + centx, pos[3] + centy);
+      curveVertex(pos[4] + centx, pos[5] + centy);
+      curveVertex(pos[4] + centx, pos[5] + centy);
+      endShape();
+
+      for(var i = 1; i < this.tail.length; i++) {
+        var mult = (i / taillength);
+        //print('i: ', i, ', mult: ', mult);
+
+        fill(this.red*mult, this.green*mult, this.blue*mult);
+        stroke(this.red*mult, this.green*mult, this.blue*mult );
+
+        beginShape();
+        var pos = this.tail[i];
+        curveVertex(pos[0] + centx, pos[1] + centy);
+        curveVertex(pos[0] + centx, pos[1] + centy);
+        curveVertex(pos[2] + centx, pos[3] + centy);
+        curveVertex(pos[4] + centx, pos[5] + centy);
+        curveVertex(pos[4] + centx, pos[5] + centy);
+        endShape();
+      }
+    }
 
     fill(color);
     stroke(color);
@@ -104,7 +153,6 @@ function Particle(radius, cycloidRadius, color, hypo, d, centx, centy, id, angle
     curveVertex(this.medx + centx, this.medy + centy);
     curveVertex(this.x + centx, this.y + centy);
     curveVertex(this.x + centx, this.y + centy);
-
     endShape();
   }
 
@@ -149,6 +197,24 @@ function Particle(radius, cycloidRadius, color, hypo, d, centx, centy, id, angle
     this.dslider.remove();
   }
 
+  this.updateSliderValues = function() {
+    this.radiussliderH.html('R1: ' + this.radiusslider.value());
+    this.cycloidRadiussliderH.html('R2: ' + this.cycloidRadiusslider.value());
+    this.hyposliderH.html('Epitrochoid/Hypotrochoid: ' + this.hyposlider.value());
+    this.dsliderH.html('d: ' + this.dslider.value());
+  }
+
+  this.updateSliders = function() {
+    this.radius = this.radiusslider.value();
+    this.cycloidRadius = this.cycloidRadiusslider.value();
+    this.hypo = this.hyposlider.value();
+    this.d = this.dslider.value();
+
+    this.radiussliderH.html('R1: ' + this.radiusslider.value());
+    this.cycloidRadiussliderH.html('R2: ' + this.cycloidRadiusslider.value());
+    this.hyposliderH.html('Epitrochoid/Hypotrochoid: ' + this.hyposlider.value());
+    this.dsliderH.html('d: ' + this.dslider.value());
+  }
 }
 
 function removeThisParticle(b1,b2,b3,b4,b5) {
@@ -157,4 +223,9 @@ function removeThisParticle(b1,b2,b3,b4,b5) {
   b3.remove();
   b4.remove();
   b5.remove();
+}
+
+function sliderUpdate(slider, header, radius, text) {
+  header.html(text + slider.value());
+  radius = slider.value();
 }

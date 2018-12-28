@@ -90,11 +90,13 @@ function addParticle() {
   g = random(100, 255);
   b = random(100, 255);
   if(particles.length < 10) {
-    if(!tail) {
-      particles.push(new Particle(random(20,200), random(30,100), color(r,g,b), random(0,1), random(5,50), centx, centy, id, 0));
-    } else {
+    //if(!tail) {
+    particles.push(new Particle(random(20,200), random(30,100), color(r,g,b), random(0,1), random(5,50), centx, centy, id, 0));
+    particles[particles.length - 1].updateSliders();
+    /*} else {
       particles.push(new Tail_Particle(random(20,200), random(30,100), color(r,g,b), random(0,1), random(5,50), centx, centy, id, 0));
-    }
+      particles[particles.length - 1].updateSliders();
+    }*/
   }
   id++;
 }
@@ -112,7 +114,8 @@ function removeParticle() {
 }
 
 function tailOrCont() {
-  if(!tail) {
+  tail = !tail;
+  /*if(!tail) {
     var tempParticles2 = particles.slice(0);
     while(particles.length > 0) {
       removeParticle();
@@ -133,5 +136,17 @@ function tailOrCont() {
       particles.push(new Particle(particle.radius, particle.cycloidRadius, particle.color, particle.hypo, particle.d, centx, centy, particle.id, particle.angle-updateSpeed));
     }
     tail = false;
+  }*/
+}
+
+function mouseMoved() {
+  for (var i = 0; i < particles.length; i++) {
+    particles[i].updateSliderValues();
+  }
+}
+
+function mouseReleased() {
+  for (var i = 0; i < particles.length; i++) {
+    particles[i].updateSliders();
   }
 }
