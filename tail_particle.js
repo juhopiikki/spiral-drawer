@@ -1,7 +1,9 @@
 var taillength = 100;
 var particleR = 5;
+var updateSpeed = 2;
+var updateHalf = updateSpeed/2;
 
-function Tail_Particle(radius, cycloidRadius, color, hypo, d) {
+function Tail_Particle(radius, cycloidRadius, color, hypo, d, centx, centy) {
   this.x = 0;
   this.y = 0;
 
@@ -15,6 +17,10 @@ function Tail_Particle(radius, cycloidRadius, color, hypo, d) {
   this.cycloidRadius = cycloidRadius;
 
   this.color = color;
+  this.red = red(color);
+  this.green = green(color);
+  this.blue = blue(color);
+
   this.angle = 0;
 
   this.tail = [];
@@ -26,19 +32,24 @@ function Tail_Particle(radius, cycloidRadius, color, hypo, d) {
   this.hyposlider = createSlider(0, 1, hypo);
   this.dslider = createSlider(0, 200, d);
 
+  this.radiusslider.parent('slider-holder');
+  this.cycloidRadiusslider.parent('slider-holder');
+  this.hyposlider.parent('slider-holder');
+  this.dslider.parent('slider-holder');
+
   this.update = function() {
     this.radius = this.radiusslider.value();
     this.cycloidRadius = this.cycloidRadiusslider.value();
     this.hypo = this.hyposlider.value();
     this.d = this.dslider.value();
-    this.angle += 4;
+    this.angle += updateSpeed;
     var ang1 = radians(this.angle);
 
     if(this.hypo) {
-      var values1 = this.hypotrochoid(radians(this.angle - 2), this.d, this.cycloidRadius, this.radius);
+      var values1 = this.hypotrochoid(radians(this.angle - updateHalf), this.d, this.cycloidRadius, this.radius);
       var values2 = this.hypotrochoid(ang1, this.d, this.cycloidRadius, this.radius);
     } else {
-      var values1 = this.epitrochoid(radians(this.angle - 2), this.d, this.cycloidRadius, this.radius);
+      var values1 = this.epitrochoid(radians(this.angle - updateHalf), this.d, this.cycloidRadius, this.radius);
       var values2 = this.epitrochoid(ang1, this.d, this.cycloidRadius, this.radius);
     }
 
@@ -64,12 +75,27 @@ function Tail_Particle(radius, cycloidRadius, color, hypo, d) {
   }
 
   this.show = function() {
-    for(var i = 0; i < this.tail.length; i++) {
-      var mult = (i / this.tail.length);
-      beginShape();
 
-      fill(colorAlpha(color, mult));
-      stroke(colorAlpha(color, mult));
+    // make first one transparent
+    fill(this.red, this.green, this.blue, 0);
+    stroke(this.red, this.green, this.blue, 0);
+    beginShape();
+    var pos = this.tail[0];
+    curveVertex(pos[0] + centx, pos[1] + centy);
+    curveVertex(pos[0] + centx, pos[1] + centy);
+    curveVertex(pos[2] + centx, pos[3] + centy);
+    curveVertex(pos[4] + centx, pos[5] + centy);
+    curveVertex(pos[4] + centx, pos[5] + centy);
+    endShape();
+
+    for(var i = 1; i < this.tail.length; i++) {
+      var mult = (i / taillength);
+      //print('i: ', i, ', mult: ', mult);
+
+      fill(this.red*mult, this.green*mult, this.blue*mult);
+      stroke(this.red*mult, this.green*mult, this.blue*mult );
+
+      beginShape();
       var pos = this.tail[i];
       curveVertex(pos[0] + centx, pos[1] + centy);
       curveVertex(pos[0] + centx, pos[1] + centy);
@@ -79,8 +105,8 @@ function Tail_Particle(radius, cycloidRadius, color, hypo, d) {
       endShape();
     }
 
-    fill(color); //'#FAA613');
-    stroke(color); //'#FAA613');
+    fill(this.color); //'#FAA613');
+    stroke(this.color); //'#FAA613');
     strokeWeight(1.5);
 
     noFill();
@@ -120,4 +146,10 @@ function Tail_Particle(radius, cycloidRadius, color, hypo, d) {
 function colorAlpha(aColor, alpha) {
   var c = color(aColor);
   return color('rgba(' +  [red(c), green(c), blue(c), alpha].join(',') + ')');
+}
+
+function colorDim(aColor, dim) {
+  var c = color(aColor);
+  //return color('rgb(' +  [red(c) * 1, green(c) * 1, blue(c) * 1].join(',') + ')');
+  return (red(aColor) * dim, green(aColor) * dim, blue(aColor) * dim);
 }

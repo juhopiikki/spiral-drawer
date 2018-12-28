@@ -3,14 +3,18 @@
     <title>Cool trochoids</title>
     <link rel="stylesheet" href="styles.css">
 
-    <script src="p5.min.js"></script>
-    <script src="p5.dom.js"></script>
+    <script src="lib/p5.min.js"></script>
+    <script src="lib/p5.dom.min.js"></script>
     <script src="spirals.js"></script>
     <script src="particle.js"></script>
     <script src="tail_particle.js"></script>
   </head>
   <body>
-    <h1>Draw trochroids!</h1>
-    <div id="verticalDiv" style="position: relative;"></div>
+      <div class="flex-container-1" id="sketch-holder">
+        <div class="flex-container" id="slider-holder">
+          <h1>Draw trochroids!</h1>
+        </div>
+      </div>
+      <!--<div id="verticalDiv" style="position: relative;"></div>-->
   </body>
 </html>
