@@ -93,8 +93,9 @@ function addParticle() {
   r = random(100, 255);
   g = random(100, 255);
   b = random(100, 255);
+  var hx = "#" + hex(r,2) + hex(g,2) + hex(b,2);
   if(particles.length < 10) {
-    particles.push(new Particle(random(20,200), random(30,100), color(r,g,b,255), random(0,1), random(5,50), centx, centy, id, 0));
+    particles.push(new Particle(random(20,200), random(30,100), hx, random(0,1), random(5,50), centx, centy, id, 0));
     particles[particles.length - 1].updateSliders();
   }
   id++;

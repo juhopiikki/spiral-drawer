@@ -27,7 +27,7 @@ function Particle(radius, cycloidRadius, color, hypo, d, centx, centy, id, angle
   this.d = d;
 
   this.header = createElement('p', 'Particle ' + id);
-  this.colorPicker = createInput(color, 'color');
+  this.colorPicker = createInput(this.color, 'color');
   this.radiusslider = createSlider(0, 200, radius);
   this.radiussliderH = createElement('p', 'R1: ' + radius);
   this.cycloidRadiusslider = createSlider(0, 200, cycloidRadius);
