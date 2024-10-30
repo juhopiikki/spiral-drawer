@@ -6,4 +6,6 @@ Using p5.js
 
 Inspired by kids "spiral" drawing toys.
 
-http://trochoid.herokuapp.com/
+To run locally, just open index.html.
+
+![example](https://github.com/user-attachments/assets/5a64d4ef-3fad-465a-af00-970d0c0f8b60)
